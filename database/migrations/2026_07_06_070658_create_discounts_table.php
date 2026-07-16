@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('expired_date')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
-            $table->timestamps();
+           
         });
     }
 

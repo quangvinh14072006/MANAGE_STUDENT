@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('failed_jobs', function (Blueprint $table) {
-            $table->bigInteger('id')->primary()->unsigned()->autoIncrement();
-            $table->string('uuid')->nullable(false);
-            $table->text('connection')->nullable(false);
-            $table->text('queue')->nullable(false);
-            $table->longText('payload')->nullable(false);
-            $table->longText('exception')->nullable(false);
-            $table->timestamp('failed_at')->nullable(false)->default(value('current_timestamp()'));
-
-            $table->timestamps();
-        });
+       Schema::create('failed_jobs', function (Blueprint $table) {
+    $table->id(); // Ngắn gọn cho cả cụm bigInteger()->primary()->unsigned()->autoIncrement()
+    $table->string('uuid')->unique(); // Thường UUID của failed_jobs nên là unique
+    $table->text('connection');
+    $table->text('queue');
+    $table->longText('payload');
+    $table->longText('exception');
+    
+    // Giải pháp an toàn nhất cho MySQL: Cho phép NULL để tránh lỗi default value
+    $table->timestamp('failed_at')->nullable(); 
+});
     }
 
     /**

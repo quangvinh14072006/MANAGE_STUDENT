@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('supplier_id')->nullable(false)->unsigned();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->timestamps();
+            
         });
     }
 

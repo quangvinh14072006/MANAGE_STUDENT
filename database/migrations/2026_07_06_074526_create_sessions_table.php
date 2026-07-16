@@ -4,21 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->nullable(false);
-            $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->string('ip_address')->nullable();
-            $table->text('user_agent')->nullable(false);
-            $table->text('payload')->nullable();
-            $table->integer('last_activity')->nullable(false);
-        });
+    $table->string('id')->primary();
+    $table->foreignId('user_id')->nullable()->index();
+    $table->string('ip_address', 45)->nullable();
+    $table->text('user_agent')->nullable();
+    $table->longText('payload');
+    $table->integer('last_activity')->index();
+});
     }
 
     /**

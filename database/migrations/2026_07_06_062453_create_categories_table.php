@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
-            $table->timestamps();
+            
         });
     }
 

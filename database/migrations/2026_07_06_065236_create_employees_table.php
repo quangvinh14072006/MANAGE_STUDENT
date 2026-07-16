@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
-            $table->timestamps();
+            
         });
     }
 

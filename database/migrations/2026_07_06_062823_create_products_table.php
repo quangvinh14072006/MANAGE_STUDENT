@@ -12,18 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned()->primary()->autoIncrement();
-            $table->bigIncrements('category_id')->unsigned();
-            $table->string('name');
-            $table->text('description');
-            $table->string('image');
-            $table->integer('price');
-            $table->integer('stock');
-            $table->tinyInteger('is_available');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
-            $table->timestamps();
-        });
+    $table->id(); // Cách viết ngắn gọn, tự động là BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
+    
+    // Khóa ngoại liên kết với bảng categories (Không tự tăng)
+    $table->foreignId('category_id')->constrained()->onDelete('cascade');
+    
+    $table->string('name');
+    $table->text('description');
+    $table->string('image');
+    $table->integer('price');
+    $table->integer('stock');
+    $table->tinyInteger('is_available')->default(1); // Nên để mặc định là 1 (còn hàng)
+    
+    // Sử dụng hàm này thay vì tự viết timestamp thủ công để tránh lỗi Invalid default value cũ
+    $table->nullableTimestamps(); 
+});
     }
 
     /**
